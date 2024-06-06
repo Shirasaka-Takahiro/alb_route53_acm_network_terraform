@@ -1,0 +1,11 @@
+**/.terraform/*
+
+##.tfstate files
+*.tfstate
+*.tfstate.*
+
+##.tfvars file
+*.tfvars
+
+## .tfvars files
+*.tfvarsenv/dev/.terraform/providers/registry.terraform.io/hashicorp/aws/4.48.0/darwin_amd64/terraform-provider-aws_v4.48.0_x5
