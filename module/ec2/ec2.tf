@@ -14,6 +14,7 @@ resource "aws_instance" "bastion" {
     volume_type = var.volume_type
     volume_size = var.volume_size
   }
+  user_data = file("${path.module}/install_kubectl_eksctl.sh")
 
   tags = {
     Name = "${var.general_config["project"]}-${var.general_config["env"]}-bastion"
