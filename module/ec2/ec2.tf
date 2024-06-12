@@ -1,5 +1,5 @@
 ##Web Instance
-resource "aws_instance" "bastion" {
+resource "aws_instance" "default" {
   ami       = var.ami
   subnet_id = var.public_subnet_ids[0]
   vpc_security_group_ids = [
@@ -14,17 +14,17 @@ resource "aws_instance" "bastion" {
     volume_type = var.volume_type
     volume_size = var.volume_size
   }
-  user_data = file("${path.module}/install_kubectl_eksctl.sh")
+  user_data = file("${path.module}/setup.sh")
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-bastion"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-${var.ec2_role}"
   }
 }
 
 ##Elastic IP
 resource "aws_eip" "eip_bastion" {
   vpc      = true
-  instance = aws_instance.bastion.id
+  instance = aws_instance.default.id
 
   tags = {
     Name = "${var.general_config["project"]}-${var.general_config["env"]}-bastion-eip"

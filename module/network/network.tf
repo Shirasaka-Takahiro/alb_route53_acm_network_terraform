@@ -28,6 +28,7 @@ resource "aws_subnet" "private_subnets" {
   for_each          = var.private_subnets.subnets
   cidr_block        = each.value.cidr
   availability_zone = each.value.az
+  map_public_ip_on_launch = false
 
   tags = {
     Name = "${var.general_config["project"]}-${var.general_config["env"]}-private-${substr(each.value.az, -2, 2)}"
@@ -84,4 +85,33 @@ resource "aws_route_table_association" "private_route_associations" {
   for_each       = var.private_subnets.subnets
   subnet_id      = aws_subnet.private_subnets[each.key].id
   route_table_id = aws_route_table.private_route_tables[each.key].id
+}
+
+##NAT Gateway
+resource "aws_nat_gateway" "nat_gateway" {
+  allocation_id = aws_eip.eip_nat_gateway.id
+  subnet_id = var.public_subnet_ids[0]
+  depends_on = [
+    aws_internet_gateway.internet_gateway
+  ]
+
+  tags = {
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-natgw"
+  }
+}
+
+## Nat Gateway Route
+resource "aws_route" "nat_gateway_route" {
+  nat_gateway_id = aws_nat_gateway.nat_gateway.id
+  route_table_id = var.private_route_table_ids[0]
+  destination_cidr_block = "0.0.0.0/0"
+}
+
+
+##Elastic IP for Nat Gateway
+resource "aws_eip" "eip_nat_gateway" {
+  vpc = true
+  tags = {
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-eip"
+  }
 }

@@ -8,6 +8,7 @@ variable "internal_sg_id" {}
 variable "operation_sg_1_id" {}
 variable "operation_sg_2_id" {}
 variable "operation_sg_3_id" {}
+variable "ec2_role" {}
 variable "instance_type" {}
 variable "volume_type" {}
 variable "volume_size" {}

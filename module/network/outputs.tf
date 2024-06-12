@@ -17,3 +17,7 @@ output "public_subnet_ids" {
 output "private_subnet_ids" {
   value = values(aws_subnet.private_subnets)[*].id
 }
+
+output "private_route_table_ids" {
+  value = values(aws_route_table.private_route_tables)[*].id
+}

@@ -94,6 +94,12 @@ variable "ami" {
   default     = "ami-01d078c099c7f1261"
 }
 
+variable "ec2_role" {
+  description = "Role of EC2"
+  type        = string
+  default     = ""
+}
+
 variable "instance_type" {
   description = "Instance type of EC2"
   type        = string

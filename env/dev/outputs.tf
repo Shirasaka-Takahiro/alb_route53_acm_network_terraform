@@ -15,6 +15,9 @@ output "private_subnet_ids" {
   value = module.network.private_subnet_ids
 }
 
+output "private_route_table_ids" {
+  value = module.network.private_route_table_ids
+}
 
 ##Security Group ids
 output "internal_sg_id" {

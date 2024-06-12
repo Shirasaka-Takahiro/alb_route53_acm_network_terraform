@@ -17,6 +17,8 @@ module "network" {
   internet_gateway_id = module.network.internet_gateway_id
   public_subnets      = var.public_subnets
   private_subnets     = var.private_subnets
+  public_subnet_ids = module.network.public_subnet_ids
+  private_route_table_ids = module.network.private_route_table_ids
 }
 
 ##Security Group Internal
@@ -105,6 +107,7 @@ module "ec2" {
   operation_sg_1_id = module.operation_sg_1.security_group_id
   operation_sg_2_id = module.operation_sg_2.security_group_id
   operation_sg_3_id = module.operation_sg_3.security_group_id
+  ec2_role = var.ec2_role
   key_name          = var.key_name
   public_key_path   = var.public_key_path
   instance_type     = var.instance_type

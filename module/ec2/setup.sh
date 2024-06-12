@@ -17,3 +17,15 @@ curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_ch
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
+
+# Install docker
+yum install -y docker
+
+#Install git
+yum install -y git
+
+#Install aws-cliv2
+yum remove -y awscli
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
