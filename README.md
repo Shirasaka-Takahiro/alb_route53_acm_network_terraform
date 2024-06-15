@@ -17,17 +17,7 @@ ACM
 <br />
 ALb x 1(HTTP & HTTPS Listener)
 <br />
-EFS
-<br />
 Route53
-<br />
-CloudFront
-<br />
-RDS
-<br />
-SNS
-<br />
-CloudWatch
 <br />
 S3
 
